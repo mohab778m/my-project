@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة توليد الروابط</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>توليد الروابط المخصصة</h1>
+    <div class="form-group">
+        <label for="title">العنوان:</label>
+        <input type="text" id="title" placeholder="اكتب عنوان المعاينة">
+    </div>
+    <div class="form-group">
+        <label for="description">الوصف:</label>
+        <textarea id="description" placeholder="اكتب وصف المعاينة"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="image">رابط الصورة:</label>
+        <input type="text" id="image" placeholder="أدخل رابط الصورة">
+    </div>
+    <div class="form-group">
+        <label for="redirect">الرابط النهائي (إعادة التوجيه):</label>
+        <input type="text" id="redirect" placeholder="أدخل الرابط الذي سيتم تحويل الزوار إليه">
+    </div>
+    <button onclick="generateCode()">توليد الكود</button>
+    <h3>الكود الناتج:</h3>
+    <textarea id="output" rows="10" readonly></textarea>
+
+    <script>
+        function generateCode() {
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const image = document.getElementById('image').value;
+            const redirect = document.getElementById('redirect').value;
+
+            const code = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${title}">
+    <meta name="twitter:description" content="${description}">
+    <meta name="twitter:image" content="${image}">
+    <script>
+        window.location.href = "${redirect}";
+    </script>
+</head>
+<body>
+</body>
+</html>
+            `;
+            document.getElementById('output').value = code.trim();
+        }
+    </script>
+</body>
+</html>
